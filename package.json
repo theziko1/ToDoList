@@ -9,11 +9,12 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "dev:back": "node --watch ./server/index.js ",
     "preview": "vite preview",
-    "dev" : "concurrently \"npm run dev:front \" \"npm run dev:back\""
+    "dev": "concurrently \"npm run dev:front \" \"npm run dev:back\""
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
