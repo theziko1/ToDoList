@@ -24,7 +24,7 @@ const Home = () => {
           </div>
         </section>
       </div>
-      <Modal onClose={handleOnClose} visible={showModal} name="ADD title"/>
+      <Modal onClose={handleOnClose} visible={showModal} name="ADD TASK"/>
     </>
   );
 };
