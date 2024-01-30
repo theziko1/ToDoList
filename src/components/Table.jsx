@@ -1,30 +1,59 @@
-import React from "react";
-
+import React , {useState , useEffect} from "react";
+import Skeleton from "../components/Skeleton";
+import { FaCheck } from "react-icons/fa";
+import { IoTrashBin } from "react-icons/io5";
 const Table = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  
+  useEffect(() => {
+    
+ const TimeLoading = setTimeout(() => {
+    setIsLoading(!isLoading)
+ },4000)
+ 
+ return () => clearTimeout(TimeLoading);
+  }, [])
+  
+  
   return (
+
     <>
-      <table className="gap-6 flex flex-col items-center justify-center bg-white">
+    <div className="overflow-y-auto max-h-64">
+      <table className="table-auto w-full gap-6 flex flex-col items-center justify-center bg-white font-['Inter']">
         
           <tr className="w-full flex justify-around">
-            <th className="p-6">Id</th>
-            <th className=" p-6 ">Task</th>
-            <th className="p-6 ">Priority</th>
-            <th className="p-6">Actions</th>
+            <th className="py-2 px-4 border-b h-10">ID</th>
+            <th className="py-2 px-4 border-b h-10">Task</th>
+            <th className="py-2 px-4 border-b h-10">Priority</th>
+            <th className="py-2 px-4 border-b h-10">Actions</th>
           </tr>
        
-        <tr className="bg-gray-50 w-full flex justify-around">
-          <td className="p-4 border-b">Ligne 1, Colonne 1</td>
-          <td className="p-4 border-b">Ligne 1, Colonne 2</td>
-          <td className="p-4 border-b">Ligne 1, Colonne 3</td>
-          <td className="p-4 border-b">Ligne 1, Colonne 4</td>
-        </tr>
-        <tr className="bg-white w-full flex justify-around">
-          <td className="p-4 border-b">Ligne 2, Colonne 1</td>
-          <td className="p-4 border-b">Ligne 2, Colonne 2</td>
-          <td className="p-4 border-b">Ligne 2, Colonne 3</td>
-          <td className="p-4 border-b">Ligne 2, Colonne 4</td>
-        </tr>
+        
+        {isLoading ? (
+        
+            <Skeleton />
+         
+        ) : (
+              <tr className=" w-full flex justify-around">
+              <td className="py-2 px-4 border-b h-10">Ligne 1, Colonne 1</td>
+                <td className="py-2 px-4 border-b h-10">Ligne 1, Colonne 2</td>
+                <td className="py-2 px-4 border-b h-10">Ligne 1, Colonne 3</td>
+                <td className="py-2 px-4 border-b h-10">
+                      <div className="flex flex-row gap-10 justify-center">
+                      <FaCheck color="green"/><IoTrashBin color="red"/>
+                      </div>
+                </td>
+          </tr>
+          
+          
+        
+      )}
+          
+          
+      
       </table>
+      </div>
     </>
   );
 };
