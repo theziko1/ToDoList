@@ -21,10 +21,7 @@ const userSchema = new mongoose.Schema({
       minlength: [8, 'At least enter 6 character'],
     },
 
-    tasks:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Task"
-    }]
+   
   }
   
   )
@@ -42,7 +39,7 @@ priority:{
 status:{
     type:String,
     enum:["Todo", "In Progress", "Completed"],
-    default:'Todo',
+    default:"Todo",
 },
 description:{
     type: String
@@ -53,6 +50,10 @@ actions:[{
 deadline:{
     type:Date
 },
+deleted: {
+     type: Boolean,
+      default: false 
+    },
 user:{
     type: mongoose.Schema.Types.ObjectId,
     ref:"User",
@@ -62,7 +63,7 @@ user:{
 })
 
 const User = mongoose.model('User',userSchema);
-
-
 const Task = mongoose.model('Task',taskSchema);
+
+
 module.exports = {Task,User};
