@@ -6,7 +6,7 @@ import  express  from 'express';
 
 
 //FUNCTION TO GET TASKs
-const GetTask=async(req,res)=>{
+expGetTask=async(req,res)=>{
     try {
         const task = await Task.find()
         if (task) {
