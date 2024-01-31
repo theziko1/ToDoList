@@ -56,4 +56,29 @@ const UpdateTask =async(req,res)=>{
             }
 }
 
-module.exports={UpdateTask,GetTask,GetTaskById};
+//Function Switch "Status to done "
+
+const SwitchToDone = async(req,res) => {
+    try {
+        if (Task.status === "Todo" || Task.status === "In Progress") {
+            Task.status = "Completed"
+            return res.status(200).json({
+                success :true ,
+                message : "Status Switched to Done"
+            })
+        }
+        else {
+           return  res.status(400).json({
+                 success : false,
+                 message: "Invalid Status for switching to done." 
+                });
+        }
+    } catch (error) {
+        res.status(400).json({
+            success : false,
+            error: "Server Error for switching to Done." 
+           });
+    }
+}
+
+module.exports={UpdateTask,GetTask,GetTaskById, SwitchToDone};

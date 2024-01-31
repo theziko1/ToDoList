@@ -42,7 +42,7 @@ priority:{
 status:{
     type:String,
     enum:["Todo", "In Progress", "Completed"],
-    default:'Todo',
+    default:"Todo",
 },
 description:{
     type: String
