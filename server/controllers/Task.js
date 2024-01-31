@@ -22,6 +22,7 @@ const PostTask = async (req,res) => {
 
 //FUNCTION TO GET TASKS
 const GetTask=async(req,res)=>{
+
     try {
         const task = await Task.find()
         if (task) {
