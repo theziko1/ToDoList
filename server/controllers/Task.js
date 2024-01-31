@@ -1,4 +1,4 @@
-import {Task} from "../models/Schema";
+import Task from "../models/Schema.js";
 import  express  from 'express';
 
 
@@ -117,5 +117,5 @@ const SwitchToDone = async(req,res) => {
            });
     }
 }
-
-module.exports={PostTask, GetTask, GetTaskById, UpdateTask, SwitchToDone, DeleteTask};
+const TaskController = {PostTask, GetTask, GetTaskById, UpdateTask, SwitchToDone, DeleteTask}
+export default TaskController;

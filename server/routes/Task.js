@@ -1,25 +1,19 @@
 import { Router } from "express";
-import {
-  GetTask,
-  GetTaskById,
-  UpdateTask,
-  PostTask,
-  SwitchToDone,
-  DeleteTask,
-} from "../controllers/Task";
+import TaskController from "../controllers/Task.js";
 
 const router = Router();
-router.get("/tasks", GetTask);
 
-router.get("/tasks/:id", GetTaskById);
+router.get("/tasks", TaskController.GetTask);
 
-router.put("/tasks/:id", UpdateTask);
+router.get("/tasks/:id", TaskController.GetTaskById);
 
-router.post("/tasks", PostTask);
+router.put("/tasks/:id", TaskController.UpdateTask);
 
-router.put("/switch", SwitchToDone);
+router.post("/tasks", TaskController.PostTask);
 
-router.delete("/tasks/:id", DeleteTask);
+router.put("/switch", TaskController.SwitchToDone);
+
+router.delete("/tasks/:id", TaskController.DeleteTask);
 
 
-module.exports= router
+export default router
