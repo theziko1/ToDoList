@@ -1,5 +1,6 @@
 import { Router } from "express";
 import TaskController from "../controllers/Task.js";
+import ExisteTask from "../middlewares/Task.js"
 
 const router = Router();
 
@@ -9,7 +10,7 @@ router.get("/tasks/:id", TaskController.GetTaskById);
 
 router.put("/tasks/:id", TaskController.UpdateTask);
 
-router.post("/tasks", TaskController.PostTask);
+router.post("/tasks",  ExisteTask , TaskController.PostTask);
 
 router.put("/switch", TaskController.SwitchToDone);
 
