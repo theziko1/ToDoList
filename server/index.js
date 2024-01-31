@@ -2,6 +2,7 @@ import express from "express";
 import {connect} from "mongoose";
 import {config} from "dotenv";
 import router from "./routes/Task.js"
+import UserRouter from "./routes/User.js"
 
 
 config()
@@ -9,6 +10,7 @@ config()
 const app =  express();
 app.use(express.json());
 app.use("/api",router)
+app.use("/user",UserRouter)
 const PORT = process.env.PORT || 3000
 
 connect(process.env.MONGO_URL)

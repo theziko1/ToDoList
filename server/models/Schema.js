@@ -1,6 +1,6 @@
 import {mongoose} from "mongoose";
-import pkg from 'validator';
-const { isEmail} = pkg;
+import validator from 'validator';
+const { isEmail} = validator;
 
 
 const userSchema = new mongoose.Schema({
