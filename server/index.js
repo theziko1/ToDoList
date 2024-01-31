@@ -1,12 +1,14 @@
 import express from "express";
 import {connect} from "mongoose";
 import {config} from "dotenv";
+import {router} from "./routes/Task"
 
 
 config()
 
 const app =  express();
 app.use(express.json());
+app.use("/api",router)
 const PORT = process.env.PORT || 3000
 
 connect(process.env.MONGO_URL)
