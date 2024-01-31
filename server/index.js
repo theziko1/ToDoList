@@ -1,7 +1,7 @@
 import express from "express";
 import {connect} from "mongoose";
 import {config} from "dotenv";
-import {router} from "./routes/Task"
+import router from "./routes/Task.js"
 
 
 config()

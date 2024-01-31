@@ -7,7 +7,7 @@
     "dev:front": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "dev:back": "node --watch ./server/index.js ",
+    "dev:back": "nodemon ./server/index.js ",
     "preview": "vite preview",
     "dev": "concurrently \"npm run dev:front \" \"npm run dev:back\""
   },

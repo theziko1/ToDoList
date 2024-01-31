@@ -1,5 +1,6 @@
 import {mongoose} from "mongoose";
-import{ isEmail} from 'validator';
+import pkg from 'validator';
+const { isEmail} = pkg;
 
 
 const userSchema = new mongoose.Schema({
@@ -66,4 +67,4 @@ const User = mongoose.model('User',userSchema);
 const Task = mongoose.model('Task',taskSchema);
 
 
-module.exports = {Task,User};
+export default {Task,User};
