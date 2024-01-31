@@ -1,5 +1,5 @@
-import { User } from "../models/Schema";
-import { bcrypt } from "bcrypt";
+import  User  from "../models/Schema.js";
+import  bcrypt  from "bcrypt";
 import { config } from "dotenv";
 import jwt from "jsonwebtoken"
 
@@ -57,6 +57,6 @@ export const login = async (req  , res ) => {
         res.status(500).json({success : false, message : "something went wrong"})
      }
   }
-
-
-module.exports = {signUp , login , logout};
+  const UserController = {signUp , login , logout};
+  
+  export default UserController
