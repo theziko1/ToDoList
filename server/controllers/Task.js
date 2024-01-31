@@ -1,21 +1,36 @@
-import { model } from "mongoose";
 import {Task} from "../models/Schema";
 import  express  from 'express';
 
 
 
+// FUNCTION TO CREATE TASK
 
-//FUNCTION TO GET TASKs
+const PostTask = async (req,res) => {
+    const {Title , priority , status , description , actions , deadline, deleted , user} = req.body
+
+    try {
+        new Task.create({
+            Title , priority , status , description , actions , deadline , deleted , user 
+        })
+        res.status(201).json({success: true, message : "Task Created succesfully"})
+       
+    } catch (error) {
+        res.status(500).json({success: false, error : "Internal Server Error for  Creating task "})
+    }
+}
+
+
+//FUNCTION TO GET TASKS
 const GetTask=async(req,res)=>{
     try {
         const task = await Task.find()
         if (task) {
-          return  res.status(200).json({success:true,message:"Successfully fetched tasks",task})
+          return  res.status(200).json({success:true ,message:"Successfully fetched tasks",task})
             
         }
         
     } catch (error) {
-        res.status(500).json({success:false,error:"couldn't fetch data "})
+        res.status(500).json({success:false ,error:"Internal Server Error"})
         
     }
 }
@@ -32,10 +47,12 @@ const GetTaskById=async(req,res)=>{
         }
         
     } catch (error) {
-        res.status(500).json({success:false,error:"couldn't fetch data "})
+        res.status(500).json({success:false,error:"Internal Server Error for fetched TaskId"})
         
     }
 }
+
+
 
 
 //Function TO UPDATE TASK 
@@ -51,9 +68,28 @@ const UpdateTask =async(req,res)=>{
 
         
     } catch (error) {
-        res.status(500).json({success :false ,error: "Task is not updated" });
+        res.status(500).json({success :false ,error: "Internal Server Error for Updated task" });
 
             }
+}
+
+// FUCTION TO Sotf Delete Task 
+
+const DeleteTask = async(req,res) => {
+    try {
+        const taskId= req.query.id;
+        const updatedTask= await Task.finByIdAndDelete(taskId,{delete: true},{new :true})
+        if (!updatedTask) {
+            return res.status(404).json({success :false ,message: "Task not found"});
+            
+        }
+        res.status(200).json({success :true ,message: "Task is deleted successfully",updatedTask});
+
+        
+    } catch (error) {
+        res.status(500).json({success :false ,error: "Internal Server Error for deleting server" });
+
+         }
 }
 
 //Function Switch "Status to done "
@@ -81,4 +117,4 @@ const SwitchToDone = async(req,res) => {
     }
 }
 
-module.exports={UpdateTask,GetTask,GetTaskById, SwitchToDone};
+module.exports={PostTask, GetTask, GetTaskById, UpdateTask, SwitchToDone, DeleteTask};

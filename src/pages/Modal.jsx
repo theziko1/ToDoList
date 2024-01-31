@@ -107,12 +107,17 @@ const Modal = ({ onClose, visible, name }) => {
           />
         </div>
        
-
+          
           <div className="flex justify-between items-center gap-8 m-4">
+          <button
+          onClick={() => {
+            onClose();
+          }}
+        >
             <TfiClose
               color="red"
              
-            />
+            /></button>
              <MdAddTask
             color="green"
            
@@ -122,11 +127,7 @@ const Modal = ({ onClose, visible, name }) => {
           </form>
      
 
-        <button
-          onClick={() => {
-            onClose();
-          }}
-        ></button>
+       
       </section>
     </div>
   );
