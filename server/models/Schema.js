@@ -1,4 +1,4 @@
-import {mongoose} from "mongoose";
+import mongoose from "mongoose";
 import validator from 'validator';
 const { isEmail} = validator;
 
@@ -63,8 +63,7 @@ user:{
 
 })
 
-const User = mongoose.model('User',userSchema);
-const Task = mongoose.model('Task',taskSchema);
+export const User = mongoose.model('User',userSchema);
+export const Task = mongoose.model('Task',taskSchema);
 
 
-export default {Task,User};
