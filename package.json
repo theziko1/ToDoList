@@ -6,40 +6,23 @@
   "scripts": {
     "dev:front": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "dev:back": "nodemon ./server/index.js ",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings ",
     "preview": "vite preview",
-    "dev": "concurrently \"npm run dev:front \" \"npm run dev:back\""
+    "dev:back": "nodemon ./server/index.js ",
+    "dev" : "concurrently \"npm run dev:front\" \"npm run dev:back\""
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.1",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.1.1",
-    "nodemon": "^3.0.3",
-    "path": "^0.12.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^5.0.1",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0",
-    "validator": "^13.11.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
-    "autoprefixer": "^10.4.17",
-    "concurrently": "^8.2.2",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "postcss": "^8.4.33",
-    "tailwindcss": "^3.4.1",
     "vite": "^5.0.8"
   }
 }
