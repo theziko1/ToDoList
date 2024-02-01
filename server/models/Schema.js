@@ -35,7 +35,7 @@ const taskSchema = new mongoose.Schema({
 priority:{
     type:String,
     enum:["High","Medium","Low"],
-    default:"Medium"
+    default:"Low"
 },
 status:{
     type:String,
@@ -50,6 +50,7 @@ actions:[{
 }],
 deadline:{
     type:Date
+
 },
 deleted: {
      type: Boolean,

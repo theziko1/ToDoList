@@ -1,4 +1,5 @@
 import {Task} from "../models/Schema.js";
+import {User} from "../models/Schema.js";
 import  express  from 'express';
 
 
@@ -6,16 +7,36 @@ import  express  from 'express';
 // FUNCTION TO CREATE TASK
 
 const PostTask = async (req,res) => {
-    const {Title , priority , status , description , actions , deadline, deleted , user} = req.body
-
+    
     try {
-        new Task.create({
-            Title , priority , status , description , actions , deadline , deleted , user 
+        const checkUser = await User.findById({ _id : req.body.user})
+        if (checkUser === null) {
+            return res.status(400).json({
+                success : true,
+                message : 'user not found',
+            })
+        }
+        const {Title , priority , status , description , actions , deadline , user} = req.body
+        await Task.create({
+            Title, 
+            priority, 
+            status,
+            description, 
+            actions, 
+            deadline,  
+            user : checkUser._id
         })
-        res.status(201).json({success: true, message : "Task Created succesfully"})
+        res.status(201).json({
+            success: true, 
+            message : "Task Created succesfully"
+        })
        
     } catch (error) {
-        res.status(500).json({success: false, error : "Internal Server Error for  Creating task "})
+        res.status(500).json({
+            success: false, 
+            message : "Internal Server Error for  Creating task ",
+            error : error.message
+        })
     }
 }
 
@@ -40,10 +61,13 @@ const GetTask=async(req,res)=>{
 //FUNCTION TO GET TASK BY ID
 const GetTaskById=async(req,res)=>{
     try {
-        const taskId= await Task.findById()
+        const taskId= await Task.findById(req.params.id)
 
         if (taskId) {
-          return  res.status(200).json({success:true,message:`Successfully fetched task with the id ${taskId}`});
+          return  res.status(200).json({success:true,
+            message:"Successfully fetched task with the id ",
+          data : taskId
+        });
             
         }
         
