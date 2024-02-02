@@ -45,7 +45,7 @@ const PostTask = async (req,res) => {
 const GetTask=async(req,res)=>{
 
     try {
-        const task = await Task.find()
+        const task = await Task.find().populate('user')
         if (task) {
           return  res.status(200).json({success:true ,message:"Successfully fetched tasks",task})
             

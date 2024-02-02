@@ -6,9 +6,17 @@ import jwt from "jsonwebtoken"
 config()
 
 const signUp = async (req, res) => {
+   
   try {
     const { userName, email, password } = req.body;
-    const passHash = await bcrypt.hash(password, 10);
+    const passHash = bcrypt.hash(password, 10 , (err, hash) => {
+      if (err) {
+        console.log('Error hashing password:', err);
+      } else {
+        console.log('Hashed password:', hash);
+        
+      }
+    });
     await User.create({ userName, email, password: passHash });
     res
       .status(200)
@@ -23,8 +31,8 @@ const signUp = async (req, res) => {
 const login = async (req  , res ) => {
   try { 
      
-     const { email , password} = req.body
-     const UserLogin = await User.findOne({ email })  
+     const { userName , password} = req.body
+     const UserLogin = await User.findOne({ userName })  
  
      if(!UserLogin) {
        return res.status(401).json({error : "Authentication failed"})

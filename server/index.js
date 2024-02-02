@@ -1,6 +1,7 @@
 import express from "express";
 import {connect} from "mongoose";
-import cookieParser from 'cookie-parser'
+import cookieParser from "cookie-parser"
+import cors from "cors"
 import {config} from "dotenv";
 import router from "./routes/Task.js"
 import UserRouter from "./routes/User.js"
@@ -10,10 +11,12 @@ import swaggerDocs from './docs/swagger.js';
 config()
 
 const app =  express();
+app.use(cors())
 app.use(express.json());
 app.use(cookieParser())
 app.use("/api",router)
 app.use("/user",UserRouter) 
+
 const PORT = process.env.PORT || 3000
 
 connect(process.env.MONGO_URL)
