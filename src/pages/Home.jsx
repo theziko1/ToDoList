@@ -2,13 +2,30 @@ import React , {useState} from "react";
 import { LuListTodo } from "react-icons/lu";
 import Table from "../components/Table";
 import Modal from "./Modal";
+import Card from '../components/Card.jsx'
+
+import Input from "../components/Input.jsx";
 
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const handleOnClose = () => setShowModal(false);
+  const [inputValue,setInputValue]=useState(' ');
+  const handleInputChange=(e)=>{
+    setInputValue(e.target.value);
+  }
+
   return (
     <>
+    <div className="flex justify-center items-center h-screen">
+      <Input
+        label="Username"
+        placeholder="Enter your username"
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+
+    </div>
       <div className="bg-gradient-to-r from-blue-500 to-purple-700 m-0 p-0 h-screen flex justify-center items-center">
         <section className="bg-white w-[80%] h-[75%] rounded-2xl">
           <div className="flex justify-start m-4 gap-4 text-xl">
