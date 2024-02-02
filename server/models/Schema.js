@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:[true,"Please provide your username"]
     },
-    email: {
+    email: { 
       type: String,
       required: [true, 'Please enter an email'],
       unique: true,
@@ -18,8 +18,8 @@ const userSchema = new mongoose.Schema({
   
     password: {
       type: String,
-      required: [true, 'please enter a valid email'],
-      minlength: [8, 'At least enter 6 character'],
+      required: [true, 'please enter a valid password'],
+      minlength: [6, 'At least enter 6 character'],
     },
 
    
@@ -45,9 +45,7 @@ status:{
 description:{
     type: String
 },
-actions:[{
-    type:String
-}],
+
 deadline:{
     type:Date
 

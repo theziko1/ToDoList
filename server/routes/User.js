@@ -11,7 +11,6 @@ const UserRouter = Router();
  *   description: User registration and login and logout
  */
 
-
 /**
  * @swagger
  * /signUp:

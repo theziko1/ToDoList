@@ -5,16 +5,14 @@ const Modal = ({ onClose, visible, name }) => {
   if (!visible) return null;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center ">
-      <section className="bg-blue-100 w-3/4 h-3/4 flex flex-col items-center justify-center">
-        <h1 className="w-full text-3xl  justify-center font-[Inter]">{name}</h1>
+      <section className="bg-blue-200 w-[80%] h-[75%] rounded-2xl flex flex-col p-8 m-8 items-center justify-center">
+        <h1 className="w-full text-3xl text-center font-bold justify-center font-[Inter]">{name}</h1>
      
-        <form className="w-full  p-1 bg-blue-100 rounded-md">
-         <div className="w-full grid grid-cols-2 gap-8">
-            <div className="w-full ">
+        
+         <div className="w-full grid grid-cols-2 gap-2">
+            <div className="w-full">
               <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-600"
-            >
+              htmlFor="name" className="block text-sm font-medium text-gray-600"   >
               Title
             </label>
             <input
@@ -40,7 +38,7 @@ const Modal = ({ onClose, visible, name }) => {
             /></div>
          
 
-          <div>
+          <div className="w-full">
             <label
               htmlFor="name"
               className="block text-sm font-medium text-gray-600"
@@ -69,7 +67,7 @@ const Modal = ({ onClose, visible, name }) => {
               placeholder="Describe your task"
             />
           </div>
-          <div>
+          <div className="w-full">
             <label
               htmlFor="name"
               className="block text-sm font-medium text-gray-600"
@@ -83,8 +81,8 @@ const Modal = ({ onClose, visible, name }) => {
               className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
               placeholder="Enter your name"
             />
-          </div>
-          <div className="mb-4">
+          
+         
           <label htmlFor="deadline" className="block text-sm font-medium text-gray-600">
             Deadline
           </label>
@@ -95,7 +93,7 @@ const Modal = ({ onClose, visible, name }) => {
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
-        <div className="mb-6">
+        <div className=" w-full">
           <label htmlFor="time" className="block text-sm font-medium text-gray-600">
             Set Time
           </label>
@@ -107,8 +105,8 @@ const Modal = ({ onClose, visible, name }) => {
           />
         </div>
        
-          
-          <div className="flex justify-between items-center gap-8 m-4">
+          </div>
+          <section className="flex justify-center items-center gap-12 mx-auto my-auto">
           <button
           onClick={() => {
             onClose();
@@ -122,9 +120,9 @@ const Modal = ({ onClose, visible, name }) => {
             color="green"
            
           />
-          </div>  
-             </div>
-          </form>
+          </section>  
+             
+          
      
 
        
