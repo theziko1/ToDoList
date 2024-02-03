@@ -6,23 +6,30 @@ import jwt from "jsonwebtoken"
 config()
 
 const signUp = async (req, res) => {
-   
+   const { userName, email, password } = req.body;
   try {
-    const { userName, email, password } = req.body;
-    const passHash = bcrypt.hash(password, 10 , (err, hash) => {
-      if (err) {
-        console.log('Error hashing password:', err);
-      } else {
-        console.log('Hashed password:', hash);
-        
-      }
-    });
+    
+    const existingUser = await User.findOne({ email })
+
+    if (existingUser) {
+      return res.status(409).json({ error: 'Username or email already exists' });
+    }
+    const salt = await bcrypt.genSalt(10);
+    const passHash = await bcrypt.hash(password, salt );
     await User.create({ userName, email, password: passHash });
     res
       .status(200)
       .json({ success: true, message: "User created successfully!" });
   } catch (error) {
-    res.status(400).json({ success: false, error: "couldn't create user!"+error });
+    // if (error.name === 'ValidationError') {
+    //   // Handle validation errors
+    //   const validationErrors = {};
+    //   for (const field in error.errors) {
+    //     validationErrors[field] = error.errors[field].message;
+    //   }
+    //   return res.status(400).json({ errors: validationErrors });
+    // }
+    res.status(500).json({ success: false, error: "couldn't create user!"+error });
   }
 };
 

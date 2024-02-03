@@ -6,6 +6,8 @@ import {config} from "dotenv";
 import router from "./routes/Task.js"
 import UserRouter from "./routes/User.js"
 import swaggerDocs from './docs/swagger.js';
+import bodyparser from "body-parser";
+
 
 
 config()
@@ -13,6 +15,8 @@ config()
 const app =  express();
 app.use(cors())
 app.use(express.json());
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
 app.use(cookieParser())
 app.use("/api",router)
 app.use("/user",UserRouter) 

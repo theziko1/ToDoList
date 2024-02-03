@@ -1,25 +1,25 @@
 import mongoose from "mongoose";
-import validator from 'validator';
-const { isEmail} = validator;
+
 
 
 const userSchema = new mongoose.Schema({
     userName:{
         type:String,
-        required:[true,"Please provide your username"]
+        required:true,
+        
     },
     email: { 
       type: String,
-      required: [true, 'Please enter an email'],
+      required: true,
       unique: true,
-      lowercase: true,
-      validate: [isEmail, 'Please enter a valid email'],
+      
+      
     },
   
     password: {
       type: String,
-      required: [true, 'please enter a valid password'],
-      minlength: [6, 'At least enter 6 character'],
+      required: true,
+    
     },
 
    
@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
 const taskSchema = new mongoose.Schema({
     Title:{
       type:String,
-      required:[true,"Please provide a title for the task"],
+      required:true,
 },
 priority:{
     type:String,

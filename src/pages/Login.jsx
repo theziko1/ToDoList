@@ -2,6 +2,7 @@ import React , {useState} from 'react'
 import Button from '../components/Button'
 import { Link,  useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Input from '../components/Input'
 
 
 const Login = () => {
@@ -23,16 +24,17 @@ const Login = () => {
   return (
     <>
      <div className="bg-gradient-to-r from-blue-500 to-purple-700 m-0 p-0 h-screen flex justify-center items-center">
-        <section className='bg-white p-6 w-1/2 h-3/4 rounded'>
+        <section className='bg-white p-6 w-1/2 h-5/6 rounded'>
             <h1 className='text-5xl text-purple-700 font-bold font-[Inter] flex justify-center'>Login</h1>
            
                 <div className="w-full grid grid-cols-1 gap-2 p-6 m-2">
                     <label htmlFor="" className="font-semibold font-[Inter] mx-auto">User Name</label>
-                        <input type="text" className='border border-black h-10'  value={userName} onChange={(e) => setUserName(e.target.value)}/>
+                    <Input type="text" value={userName} className='border border-black h-10' onChange={(e) => setUserName(e.target.value)} /> 
+                
                 
                         
-                    <label htmlFor="" className="font-semibold font-[Inter] mx-auto" value={password} onChange={(e) => setPassword(e.target.value)}>Password</label>
-                        <input type="password" className='border border-black h-10'/>
+                    <label htmlFor="" className="font-semibold font-[Inter] mx-auto" >Password</label>
+                        <Input type="password" className='border border-black h-10'value={password} onChange={(e) => setPassword(e.target.value)}/>
                    <Button className="bg-gradient-to-r from-blue-500 to-purple-700" onClick={handleLogin}>Connect User</Button >
                 </div>
                 
