@@ -3,31 +3,71 @@ import Skeleton from "../components/Skeleton";
 import { FaCheck } from "react-icons/fa";
 import { IoTrashBin } from "react-icons/io5";
 import axios from "axios";
+import Badge from "./Badge";
+import { useNavigate } from "react-router-dom";
 
 const Table = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState({
+    id : "",
+    Title :"",
+    priority : "",
+    status : "",
+    deadline :"",
+    description : "",
+
+  });
+
+  const Navigate = useNavigate()
+  
 
   const getAllTasks = async () => {
     try {
       const res = await axios.get("http://localhost:3000/api/tasks");
 
       setTasks(res.data.task);
-      console.log(res.data.task);
+      Navigate("/home")
     } catch (error) {
       console.log(error);
     }
   };
 
+  const UpdateStateTask = async (taskId) => {
+    try {
+      const confirmUpdateState = window.confirm('Are you sure to switch task to Completed?')
+      if (confirmUpdateState) {
+        await axios.put(`http://localhost:3000/api/tasks/${taskId}`,{
+        ...tasks,
+         status : "Completed"})
+      }
+      window.location.reload(false)
+        
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const DeleteTask = async (taskId) => {
+    try {
+      const confirmDelete = window.confirm('Are you sure to delete this Task?')
+      if (confirmDelete) {
+        await axios.delete(`http://localhost:3000/api/tasks/${taskId}`)
+      }
+      window.location.reload(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     const TimeLoading = setTimeout(() => {
       setIsLoading(!isLoading);
-    }, 2000);
+    }, 1000);
 
     getAllTasks();
     console.log(tasks);
     return () => clearTimeout(TimeLoading);
-  }, []);
+  }, [tasks.id]);
 
   return (
     <>
@@ -48,24 +88,31 @@ const Table = () => {
           {isLoading ? (
             <Skeleton />
           ) : (
-            <tbody className="w-full flex justify-around">
-              {tasks.map((task, idx) => (
-                <tr className="w-full flex justify-around" key={idx}>
-                  <td>{task.Title} </td>
-                  <td>{task.priority}</td>
-                  <td>{task.status}</td>
-                  <td>{task.description}</td>
-                  <td className="py-2 px-4 h-10">
-                    <span className="flex flex-row justify-center">
-                      <FaCheck color="green" />
-                      <IoTrashBin color="red" />
+            <div className="w-full">
+            {tasks.map((task, idx) => (
+            <tbody className="w-full flex gap-0 justify-around"key={idx}>
+              
+                <tr className="w-full flex gap-0 justify-around" >
+                  <td className="py-2 px-4 w-fit border-b h-10">{task.Title} </td>
+                  <td className="py-2 px-4- w-fit border-b h-10"><Badge className={`${task.priority == "Low" && "bg-green-500"} 
+                  || ${task.priority == "Medium" && "bg-yellow-500"} ||
+                  ${task.priority == "High" && "bg-red-500"} }`} >{task.priority}</Badge></td>
+                  <td className="py-2 px-4 w-fit border-b h-10"><Badge className={`${task.status == "Todo" && "bg-blue-500"} 
+                  || ${task.status == "In Progress" && "bg-teal-500"} ||
+                  ${task.status == "Completed" && "bg-green-500"} }`}>{task.status}</Badge></td>
+                  <td className="py-2 px-4 w-fit border-b h-10">{task.description}</td>
+                  <td className="py-2 px-4 w-fit border-b h-10">
+                    <span className="flex flex-row  gap-4 justify-center">
+                      <FaCheck color="green" onClick={() => UpdateStateTask(task._id)} />
+                      <IoTrashBin color="red" onClick={() => DeleteTask(task._id)}/>
                     </span>
                   </td>
-                  <td>{task.user.userName}</td>
-                  <td>{task.deadline}</td>
+                  <td className="py-2 px-4 w-fit justify-center border-b h-10">{task.user.userName}</td>
+                  <td className=" py-2 px-4 w-fit border-b h-10">{task.deadline}</td>
                 </tr>
-              ))}
+             
             </tbody>
+             ))}</div>
           )}
         </table>
 

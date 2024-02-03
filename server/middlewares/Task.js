@@ -5,8 +5,8 @@ import {Task}  from "../models/Schema.js";
 
 const ExisteTask = async( req  , res , next ) => {
     try {
-            const { user } = req.body
-            const CheckTaskByUser = await Task.findOne({ user })
+            const { Title } = req.body
+            const CheckTaskByUser = await Task.findOne({ Title })
             
             
             if (CheckTaskByUser) {

@@ -9,11 +9,12 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings ",
     "preview": "vite preview",
     "dev:back": "nodemon ./server/index.js ",
-    "dev" : "concurrently \"npm run dev:front\" \"npm run dev:back\""
+    "dev": "concurrently \"npm run dev:front\" \"npm run dev:back\""
   },
   "dependencies": {
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
@@ -29,8 +30,6 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "validator": "^13.11.0"
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

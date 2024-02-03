@@ -83,8 +83,8 @@ const GetTaskById=async(req,res)=>{
 //Function TO UPDATE TASK 
 const UpdateTask =async(req,res)=>{
     try {
-        const taskId= req.query.id;
-        const updatedTask= await Task.finByIdAndUpdate(taskId,req.body,{new :true})
+        const taskId= req.params.id;
+        const updatedTask= await Task.findByIdAndUpdate(taskId,req.body,{new :true})
         if (!updatedTask) {
             return res.status(404).json({success :false ,message: `Cannot find the task with the id ${taskId}`});
             
@@ -102,8 +102,8 @@ const UpdateTask =async(req,res)=>{
 
 const DeleteTask = async(req,res) => {
     try {
-        const taskId= req.query.id;
-        const updatedTask= await Task.finByIdAndDelete(taskId,{delete: true},{new :true})
+        const taskId= req.params.id;
+        const updatedTask= await Task.findByIdAndDelete(taskId,{delete: true},{new :true})
         if (!updatedTask) {
             return res.status(404).json({success :false ,message: "Task not found"});
             
@@ -122,7 +122,7 @@ const DeleteTask = async(req,res) => {
 const SwitchToDone = async(req,res) => {
     try {
         if (Task.status === "Todo" || Task.status === "In Progress") {
-            Task.status = "Completed"
+            Task.status == "Completed"
             return res.status(200).json({
                 success :true ,
                 message : "Status Switched to Done"
@@ -135,7 +135,7 @@ const SwitchToDone = async(req,res) => {
                 });
         }
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             success : false,
             error: "Server Error for switching to Done." 
            });

@@ -6,7 +6,7 @@ const Modal = ({ onClose, visible, name }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center ">
       <section className="bg-blue-200 w-[80%] h-[75%] rounded-2xl flex flex-col p-8 m-8 items-center justify-center">
-        <h1 className="w-full text-3xl text-center font-bold justify-center font-[Inter]">{name}</h1>
+        <h1 className="w-full text-3xl italic text-center font-bold justify-center font-[Inter]">{name}</h1>
      
         
          <div className="w-full grid grid-cols-2 gap-2">
