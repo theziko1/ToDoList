@@ -1,6 +1,7 @@
 import { Router } from "express";
 import TaskController from "../controllers/Task.js";
 import ExisteTask from "../middlewares/Task.js"
+import verifyToken from "../middlewares/User.js"
 
 const router = Router();
 /**
@@ -124,7 +125,7 @@ router.put("/tasks/:id", TaskController.UpdateTask);
  *       500:
  *         description: Internal Server Error for creating task
  */
-router.post("/tasks",  ExisteTask , TaskController.PostTask);
+router.post("/tasks"  , TaskController.PostTask);
 /**
  * @swagger
  * /tasks/switch-to-done:

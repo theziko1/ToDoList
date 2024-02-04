@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import Skeleton from "../components/Skeleton";
 import { FaCheck } from "react-icons/fa";
 import { IoTrashBin } from "react-icons/io5";
+import { MdEditSquare } from "react-icons/md";
 import axios from "axios";
 import Badge from "./Badge";
-import { useNavigate } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+
 
 const Table = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,6 +20,8 @@ const Table = () => {
 
   });
 
+
+
   const Navigate = useNavigate()
   
 
@@ -27,6 +31,7 @@ const Table = () => {
 
       setTasks(res.data.task);
       Navigate("/home")
+      setIsLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -60,14 +65,18 @@ const Table = () => {
   }
 
   useEffect(() => {
-    const TimeLoading = setTimeout(() => {
-      setIsLoading(!isLoading);
-    }, 1000);
+   
 
     getAllTasks();
-    console.log(tasks);
-    return () => clearTimeout(TimeLoading);
+    
   }, [tasks.id]);
+
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
+    return formattedDate;
+  };
 
   return (
     <>
@@ -104,11 +113,12 @@ const Table = () => {
                   <td className="py-2 px-4 w-fit border-b h-10">
                     <span className="flex flex-row  gap-4 justify-center">
                       <FaCheck color="green" onClick={() => UpdateStateTask(task._id)} />
+                      <Link to={`/${task._id}`}><MdEditSquare color="blue" /></Link>
                       <IoTrashBin color="red" onClick={() => DeleteTask(task._id)}/>
                     </span>
                   </td>
                   <td className="py-2 px-4 w-fit justify-center border-b h-10">{task.user.userName}</td>
-                  <td className=" py-2 px-4 w-fit border-b h-10">{task.deadline}</td>
+                  <td className=" py-2 px-4 w-fit border-b h-10">{formatDate(task.deadline)}</td>
                 </tr>
              
             </tbody>
@@ -116,32 +126,9 @@ const Table = () => {
           )}
         </table>
 
-        {/* <table  className="table-auto w-full gap-6 flex flex-col items-center justify-center bg-white font-['Inter']">
-          <thead>
-          <tr className="w-full flex justify-around">
-              <th className="py-2 px-4 border-b h-10">Title</th>
-              <th className="py-2 px-4 border-b h-10">Priorité</th>
-              <th className="py-2 px-4 border-b h-10">Status</th>
-              <th className="py-2 px-4 border-b h-10">Description</th>
-              <th className="py-2 px-4 border-b h-10">Actions</th>
-              <th className="py-2 px-4 border-b h-10">Créer par</th>
-              <th className="py-2 px-4 border-b h-10">Deadline</th>
-            </tr>
-          </thead>
-          <tbody> 
-            {
-              tasks.map((task,idx)=>(
-                <tr className="w-full flex justify-around" key={idx}>
-                  <td>{task.Title} </td>
-                  <td>{task.priority}</td>
-                  <td>{task.status}</td>
-                  <td>{task.description}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table> */}
+        
       </div>
+     
     </>
   );
 };

@@ -72,6 +72,20 @@ const logout = (req ,res ) => {
         res.status(500).json({success : false, message : "something went wrong "+error})
      }
   }
-  const UserController = {signUp , login , logout};
+
+
+  // get Username 
+  const GetUserName = async (req , res) => {
+      
+      try {
+         
+         const Allusernames = await User.find()
+         
+         res.status(200).json({ success : true , message : "users found " , data : Allusernames})
+      } catch (error) {
+         res.status(500).json({ success : false , message : "users not found "})
+      }
+  }
+  const UserController = {signUp , login , logout , GetUserName};
   
   export default UserController

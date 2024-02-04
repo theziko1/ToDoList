@@ -13,19 +13,18 @@ const PostTask = async (req,res) => {
         if (checkUser === null) {
             return res.status(400).json({
                 success : true,
-                message : 'user not found',
+                message : 'user not found', 
             })
         }
-        const {Title , priority , status , description , actions , deadline , user} = req.body
+        const {Title , priority , status , description , deadline , user} = req.body
         await Task.create({
             Title, 
             priority, 
             status,
             description, 
-            actions, 
             deadline,  
             user : checkUser._id
-        })
+        }).
         res.status(201).json({
             success: true, 
             message : "Task Created succesfully"
@@ -61,7 +60,7 @@ const GetTask=async(req,res)=>{
 //FUNCTION TO GET TASK BY ID
 const GetTaskById=async(req,res)=>{
     try {
-        const taskId= await Task.findById(req.params.id)
+        const taskId= await Task.findById(req.params.id).populate('user')
 
         if (taskId) {
           return  res.status(200).json({success:true,

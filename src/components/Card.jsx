@@ -1,6 +1,6 @@
 import React from "react";
 
-const Card = ({ title, description, className }) => {
+const Card = ({ title, description, className , ...props }) => {
   return (
     <div
       className={`bg-white rounded-lg overflow-hidden shadow-md p-6 ${className}`}
