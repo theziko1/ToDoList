@@ -118,6 +118,8 @@ UserRouter.post("/login", UserController.login);
 
 UserRouter.get("/logout", UserController.logout);
 
+UserRouter.get("/allUsers", UserController.GetUserName);
+
 
 
 

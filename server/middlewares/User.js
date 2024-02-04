@@ -1,5 +1,5 @@
 import express from "express";
-import {jwt} from "jsonwebtoken"
+import jwt from "jsonwebtoken"
 import {config} from "dotenv"
 
 
@@ -10,11 +10,11 @@ const verifyToken = (req,res,next) => {
    if (!token) return res.status(401).json({ message: 'No token provided.'})
    try {
       const decode =jwt.verify(token,process.env.SECRET_KEY )
-      req.token = decoded 
+      req.token = decode
       next();
    } catch (error) {
     
-    res.status(401).json({error: '"nvalid token'})
+    res.status(401).json({error: 'invalid token'})
    }
 } 
 
