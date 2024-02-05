@@ -19,6 +19,7 @@ const Modal = ({ onClose, visible, name }) => {
   const [errors, setErrors] = useState({
     error : ""
   });
+  const Navigate = useNavigate()
 
   const GetUsers = async () =>{
     
@@ -53,7 +54,8 @@ const Modal = ({ onClose, visible, name }) => {
       };
         
        await axios.post("http://localhost:3000/api/tasks", newTask)
-       onClose()
+       
+        Navigate("/home")
         
         
     }    
