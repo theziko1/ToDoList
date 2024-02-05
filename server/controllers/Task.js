@@ -24,7 +24,7 @@ const PostTask = async (req,res) => {
             description, 
             deadline,  
             user : checkUser._id
-        }).
+        });
         res.status(201).json({
             success: true, 
             message : "Task Created succesfully"

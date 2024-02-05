@@ -8,6 +8,7 @@ import Input from '../components/Input'
 const Login = () => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState({});
 
     const navigate = useNavigate()
 
@@ -19,6 +20,7 @@ const Login = () => {
        
         } catch (error) {
           console.error('Error during Login:', error.response.data);
+          setErrors(error.response.data)
         }
       };
   return (
@@ -37,7 +39,9 @@ const Login = () => {
                         <Input type="password" className='border border-black h-10'value={password} onChange={(e) => setPassword(e.target.value)}/>
                    <Button className="bg-gradient-to-r from-blue-500 to-purple-700" onClick={handleLogin}>Connect User</Button >
                 </div>
-                
+                { errors.error && <span className=" w-full flex bg-red-400 p-2 justify-center font-bold rounded text-white font-[poppins]">
+                  { errors.error}
+                  </span> }
                 <div className="w-full flex justify-around items-center">
                     <h6 className='font-[Inter] font-semibold'>Are you Registered ?</h6>
                    <Link to="/"> <Button className="justify-center bg-red-500">Sign Up</Button ></Link>
