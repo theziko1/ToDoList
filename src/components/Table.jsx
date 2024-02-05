@@ -99,29 +99,44 @@ const Table = () => {
           ) : (
             <div className="w-full">
             {tasks.map((task, idx) => (
-            <tbody className="w-full flex gap-0 justify-around"key={idx}>
-              
-                <tr className="w-full flex gap-0 justify-around" >
-                  <td className="py-2 px-4 w-fit border-b h-10">{task.Title} </td>
-                  <td className="py-2 px-4- w-fit border-b h-10"><Badge className={`${task.priority == "Low" && "bg-green-500"} 
-                  || ${task.priority == "Medium" && "bg-yellow-500"} ||
-                  ${task.priority == "High" && "bg-red-500"} }`} >{task.priority}</Badge></td>
-                  <td className="py-2 px-4 w-fit border-b h-10"><Badge className={`${task.status == "Todo" && "bg-blue-500"} 
-                  || ${task.status == "In Progress" && "bg-teal-500"} ||
-                  ${task.status == "Completed" && "bg-green-500"} }`}>{task.status}</Badge></td>
-                  <td className="py-2 px-4 w-fit border-b h-10">{task.description}</td>
-                  <td className="py-2 px-4 w-fit border-b h-10">
-                    <span className="flex flex-row  gap-4 justify-center">
-                      <FaCheck color="green" onClick={() => UpdateStateTask(task._id)} />
-                      <Link to={`/${task._id}`}><MdEditSquare color="blue" /></Link>
-                      <IoTrashBin color="red" onClick={() => DeleteTask(task._id)}/>
-                    </span>
-                  </td>
-                  <td className="py-2 px-4 w-fit justify-center border-b h-10">{task.user.userName}</td>
-                  <td className=" py-2 px-4 w-fit border-b h-10">{formatDate(task.deadline)}</td>
-                </tr>
-             
-            </tbody>
+            <tbody className="w-full flex gap-0 justify-around" key={idx}>
+            <tr className="w-full flex gap-0 justify-around">
+              <td className="py-2 px-4 border-b h-10 text-center">{task.Title}</td>
+              <td className="py-2 px-4 flex justify-center border-b h-10">
+                <Badge
+                  className={`${
+                    task.priority === "Low" && "bg-green-500"
+                  } || ${task.priority === "Medium" && "bg-yellow-500"} ||
+                            ${task.priority === "High" && "bg-red-500"}`}
+                >
+                  {task.priority}
+                </Badge>
+              </td>
+              <td className="py-2 px-4 flex justify-center border-b h-10">
+                <Badge
+                  className={`${
+                    task.status === "Todo" && "bg-blue-500"
+                  } || ${task.status === "In Progress" && "bg-teal-500"} ||
+                            ${task.status === "Completed" && "bg-green-500"}`}
+                >
+                  {task.status}
+                </Badge>
+              </td>
+              <td className="py-2 px-4 flex justify-center border-b h-10">{task.description}</td>
+              <td className="py-2 px-4 flex justify-center border-b h-10">
+                <span className="flex flex-row gap-4 justify-center">
+                  <FaCheck color="green" onClick={() => UpdateStateTask(task._id)} />
+                  <Link to={`/${task._id}`}>
+                    <MdEditSquare color="blue" />
+                  </Link>
+                  <IoTrashBin color="red" onClick={() => DeleteTask(task._id)} />
+                </span>
+              </td>
+              <td className="py-2 px-4  flex justify-center border-b h-10">{task.user.userName}</td>
+              <td className="py-2 px-4 flex justify-center border-b h-10">{formatDate(task.deadline)}</td>
+            </tr>
+          </tbody>
+          
              ))}</div>
           )}
         </table>
