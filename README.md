@@ -35,9 +35,9 @@ Configurez l'URL du backend dans le fichier .env.
 
 Lancez l'application frontend :
 
-        ```bash
-            npm start
-        ```
+   ```bash
+   npm start
+   ```
 ## Fonctionnalités
 Authentification utilisateur : Utilisation de JWT pour sécuriser les endpoints et gérer les sessions utilisateur.
 Gestion des tâches : Ajout, suppression, et marquage des tâches comme complétées.
